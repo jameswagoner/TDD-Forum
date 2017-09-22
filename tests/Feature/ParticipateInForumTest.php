@@ -33,7 +33,6 @@ class ParticipateInForumTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = create(User::class);
         $this->thread = create(Thread::class);
         $this->reply = make(Reply::class);
     }
@@ -49,7 +48,7 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     public function an_authenticated_user_may_participate_in_forum_threads()
     {
-        $this->be($this->user);
+        $this->signIn();
 
         $this->post($this->thread->path() . '/replies', $this->reply->toArray());
 
