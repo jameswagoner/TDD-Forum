@@ -33,16 +33,12 @@ class CreateThreadTest extends TestCase
     /** @test */
     public function an_unauthenticated_user_cannot_create_new_forum_threads()
     {
-        $this->expectException(AuthenticationException::class);
+        $this->withExceptionHandling();
 
-        $this->post('/threads', []);
-    }
+        $this->get('/threads/create')
+             ->assertRedirect('/login');
 
-    /** @test */
-    public function an_unauthenticated_user_cannot_access_create_thread_form()
-    {
-        $this->withExceptionHandling()
-            ->get('/threads/create')
+        $this->post('/threads')
             ->assertRedirect('/login');
     }
 
