@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ViewThreads extends TestCase
+class ViewThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 

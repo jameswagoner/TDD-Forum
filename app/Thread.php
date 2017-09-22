@@ -20,12 +20,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Thread whereUserId($value)
  * @mixin \Eloquent
- * @property-read \App\User $owner
+ * @property-read \App\User $creator
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Reply[] $replies
  */
 class Thread extends Model
 {
-    public function owner()
+    protected $guarded = [];
+
+    public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -33,5 +35,10 @@ class Thread extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function addReply($reply)
+    {
+        $this->replies()->create($reply);
     }
 }

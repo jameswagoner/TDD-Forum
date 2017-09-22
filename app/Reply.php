@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $body
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\User $owner
+ * @property-read \App\User $creator
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Reply whereBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Reply whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Reply whereId($value)
@@ -24,7 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Reply extends Model
 {
-    public function owner()
+    protected $guarded = [];
+
+    public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
