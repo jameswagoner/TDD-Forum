@@ -14,10 +14,23 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-            <?php foreach($thread->replies as $reply) : ?>
+            @foreach ($thread->replies as $reply)
                 @include('threads.reply')
-            <?php endforeach; ?>
+            @endforeach
             </div>
         </div>
+        @if (auth()->check())
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <form method="post" action="/threads/<?= $thread->id ?>/replies">
+                        <?= csrf_field() ?>
+                        <div class="form-group">
+                            <textarea name="body" class="form-control" placeholder="Got something to say?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection
