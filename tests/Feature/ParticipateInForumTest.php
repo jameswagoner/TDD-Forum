@@ -33,9 +33,9 @@ class ParticipateInForumTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
-        $this->thread = factory(Thread::class)->create();
-        $this->reply = factory(Reply::class)->make();
+        $this->user = create(User::class);
+        $this->thread = create(Thread::class);
+        $this->reply = make(Reply::class);
     }
 
     /** @test */
@@ -51,9 +51,9 @@ class ParticipateInForumTest extends TestCase
     {
         $this->be($this->user);
 
-        $this->post('/threads/'.$this->thread->id.'/replies', $this->reply->toArray());
+        $this->post($this->thread->path() . '/replies', $this->reply->toArray());
 
-        $this->get('/threads/'.$this->thread->id)
+        $this->get($this->thread->path())
             ->assertSee($this->reply->body);
     }
 }

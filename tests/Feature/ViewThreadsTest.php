@@ -21,7 +21,7 @@ class ViewThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = factory(Thread::class)->create();
+        $this->thread = create(Thread::class);
     }
 
     /** @test */
@@ -34,16 +34,16 @@ class ViewThreadsTest extends TestCase
     /** @test */
     public function a_user_can_view_a_single_thread()
     {
-        $this->get('/threads/' . $this->thread->id)
+        $this->get($this->thread->path())
              ->assertSee($this->thread->title);
     }
 
     /** @test */
     public function a_user_can_view_replies_that_are_associated_with_a_thread()
     {
-        $reply = factory(Reply::class)->create(['thread_id' => $this->thread->id]);
+        $reply = create(Reply::class, ['thread_id' => $this->thread->id]);
 
-        $this->get('/threads/' . $this->thread->id)
+        $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
 }

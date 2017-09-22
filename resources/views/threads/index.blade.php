@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         <?php foreach ($threads as $thread) : ?>
                             <article>
-                                <h4><a href="/threads/<?= $thread->id ?>"><?= $thread->title ?></a></h4>
+                                <h4><a href="<?= $thread->path() ?>"><?= $thread->title ?></a></h4>
                                 <div class="body"><?= $thread->body ?></div>
                             </article>
                             <hr />

@@ -22,7 +22,7 @@
         @if (auth()->check())
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <form method="post" action="/threads/<?= $thread->id ?>/replies">
+                    <form method="post" action="<?= $thread->path() ?>/replies">
                         <?= csrf_field() ?>
                         <div class="form-group">
                             <textarea name="body" class="form-control" placeholder="Got something to say?"></textarea>

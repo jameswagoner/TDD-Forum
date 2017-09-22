@@ -48,7 +48,7 @@ class ThreadController extends Controller
             'body' => $request->input('body')
         ]);
 
-        return redirect('/threads/' . $thread->id);
+        return redirect($thread->path());
     }
 
     /**

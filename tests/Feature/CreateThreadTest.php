@@ -26,8 +26,8 @@ class CreateThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
-        $this->thread = factory(Thread::class)->make();
+        $this->user = create(User::class);
+        $this->thread = make(Thread::class);
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class CreateThreadTest extends TestCase
 
         $this->post('/threads', $this->thread->toArray());
 
-        $this->get('/threads/' . $this->thread->id)
+        $this->get($this->thread->path())
             ->assertSee($this->thread->title);
     }
 }
