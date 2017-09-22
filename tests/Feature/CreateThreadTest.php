@@ -39,6 +39,14 @@ class CreateThreadTest extends TestCase
     }
 
     /** @test */
+    public function an_unauthenticated_user_cannot_access_create_thread_form()
+    {
+        $this->withExceptionHandling()
+            ->get('/threads/create')
+            ->assertRedirect('/login');
+    }
+
+    /** @test */
     public function an_authenticate_user_can_create_new_forum_threads()
     {
         $this->signIn();
